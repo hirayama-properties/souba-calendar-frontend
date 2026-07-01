@@ -1,0 +1,55 @@
+/* Ported verbatim from the prototype's <helmet><style> block
+   (相場カレンダー.dc.html lines 15-24). Everything else in this app is
+   inline styles copied from the prototype's own inline style objects — no
+   dark-mode handling, since the prototype has none. */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #fbfaf8;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-thumb {
+  background: #d8d0c4;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c4baa9;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+input::placeholder {
+  color: #a8a092;
+}
