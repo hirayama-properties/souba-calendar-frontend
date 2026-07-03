@@ -19,7 +19,12 @@ export async function enablePushNotifications(): Promise<void> {
   const publicKey = await getVapidPublicKey();
   if (!publicKey) throw new Error('通知の設定が完了していません（サーバー側でVAPID鍵が未設定です）');
 
-  const registration = await navigator.serviceWorker.register('/sw.js');
+  // register() resolves as soon as the registration exists, before the worker
+  // has actually reached the "activated" state — subscribing against that
+  // registration too early throws "no active Service Worker". Waiting on
+  // `.ready` guarantees an activated worker is in control.
+  await navigator.serviceWorker.register('/sw.js');
+  const registration = await navigator.serviceWorker.ready;
   const subscription = await registration.pushManager.subscribe({
     userVisibleOnly: true,
     applicationServerKey: urlBase64ToUint8Array(publicKey) as BufferSource,

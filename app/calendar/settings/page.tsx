@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useCalendarState } from '@/components/calendar/CalendarStateContext';
 import { useAuth } from '@/lib/useAuth';
 import { Toggle, SegmentedRow } from '@/components/calendar/SettingsControls';
+import GcalSyncPanel from '@/components/calendar/GcalSyncPanel';
 import { enablePushNotifications, disablePushNotifications } from '@/lib/usePushNotifications';
 import { PALETTE, TYPE_LABEL_LONG } from '@/lib/palette';
 import type { FilterKey } from '@/lib/types';
@@ -192,17 +193,35 @@ export default function SettingsPage() {
         <div>
           <div style={sectionTitleStyle}>連携・データ書き出し</div>
           <div style={cardStyle}>
-            <div style={rowStyle}>
-              <div style={{ fontSize: '13.5px', fontWeight: 600 }}>Googleカレンダー連携</div>
-              {!isPremium && <ProBadge />}
-            </div>
+            {isPremium ? (
+              <div style={{ borderBottom: '1px solid #f1ece3' }}>
+                <div style={{ padding: '15px 18px 0', fontSize: '13.5px', fontWeight: 600 }}>Googleカレンダー連携</div>
+                <div style={{ fontSize: '11.5px', color: C.textLo, padding: '4px 18px 0' }}>
+                  お使いのGoogleカレンダー（メイン）に予定を追加します。
+                </div>
+                <GcalSyncPanel onNeedsPremium={openPremium} />
+              </div>
+            ) : (
+              <div onClick={openPremium} style={{ ...rowStyle, cursor: 'pointer' }}>
+                <div style={{ fontSize: '13.5px', fontWeight: 600 }}>Googleカレンダー連携</div>
+                <ProBadge />
+              </div>
+            )}
             <div style={rowStyle}>
               <div style={{ fontSize: '13.5px', fontWeight: 600 }}>CSVで書き出し</div>
-              {!isPremium && <ProBadge />}
+              {isPremium ? (
+                <div style={{ fontSize: '11.5px', color: C.textLo }}>カレンダー画面上部の「エクスポート」から</div>
+              ) : (
+                <ProBadge />
+              )}
             </div>
             <div style={{ ...rowStyle, borderBottom: 'none' }}>
               <div style={{ fontSize: '13.5px', fontWeight: 600 }}>PDFで書き出し</div>
-              {!isPremium && <ProBadge />}
+              {isPremium ? (
+                <div style={{ fontSize: '11.5px', color: C.textLo }}>カレンダー画面上部の「PDF」から</div>
+              ) : (
+                <ProBadge />
+              )}
             </div>
           </div>
         </div>

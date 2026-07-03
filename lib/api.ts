@@ -77,7 +77,11 @@ export async function gcalSync(params: EventsQuery): Promise<{ synced: number; t
 }
 
 export async function getVapidPublicKey(): Promise<string | null> {
-  const res = await fetch(functionUrl('push-subscribe'), { headers: { apikey: SUPABASE_ANON_KEY } });
+  // Supabase's gateway requires an Authorization header (not just apikey) or
+  // it 401s with UNAUTHORIZED_NO_AUTH_HEADER before the function even runs —
+  // found while debugging why this always silently returned null.
+  const headers = await authHeaders();
+  const res = await fetch(functionUrl('push-subscribe'), { headers });
   if (!res.ok) return null;
   const body = await res.json();
   return body.publicKey ?? null;
