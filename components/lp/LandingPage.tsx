@@ -486,7 +486,7 @@ export default function LandingPage() {
               <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', fontSize: '13px', color: '#211e19', fontWeight: 600 }}>
                 <span style={{ color: C.gold, flexShrink: 0 }}>✓</span>無料プランのすべて
               </div>
-              {['翌月以降も無制限に閲覧', 'CSV・PDFで書き出し', '重要イベントの前日通知（ブラウザ）', 'Googleカレンダー連携', '絞り込み条件の保存・広告非表示'].map((f) => (
+              {['翌月以降も無制限に閲覧', 'CSV・PDFで書き出し', 'Googleカレンダー連携', '絞り込み条件の保存・広告非表示'].map((f) => (
                 <div key={f} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', fontSize: '13px', color: '#3a342c' }}>
                   <span style={{ color: C.gold, flexShrink: 0 }}>✓</span>
                   {f}

@@ -76,33 +76,8 @@ export async function gcalSync(params: EventsQuery): Promise<{ synced: number; t
   return res.json();
 }
 
-export async function getVapidPublicKey(): Promise<string | null> {
-  // Supabase's gateway requires an Authorization header (not just apikey) or
-  // it 401s with UNAUTHORIZED_NO_AUTH_HEADER before the function even runs —
-  // found while debugging why this always silently returned null.
-  const headers = await authHeaders();
-  const res = await fetch(functionUrl('push-subscribe'), { headers });
-  if (!res.ok) return null;
-  const body = await res.json();
-  return body.publicKey ?? null;
-}
-
-export async function subscribePush(subscription: PushSubscriptionJSON): Promise<void> {
-  const headers = await authHeaders();
-  const res = await fetch(functionUrl('push-subscribe'), {
-    method: 'POST',
-    headers: { ...headers, 'content-type': 'application/json' },
-    body: JSON.stringify(subscription),
-  });
-  if (!res.ok) throw new Error(`push-subscribe failed: HTTP ${res.status}`);
-}
-
-export async function unsubscribePush(endpoint: string): Promise<void> {
-  const headers = await authHeaders();
-  const res = await fetch(functionUrl('push-subscribe'), {
-    method: 'DELETE',
-    headers: { ...headers, 'content-type': 'application/json' },
-    body: JSON.stringify({ endpoint }),
-  });
-  if (!res.ok) throw new Error(`push-subscribe (delete) failed: HTTP ${res.status}`);
-}
+// Web Push (push-subscribe/notify-daily) was shelved — confirmed in testing
+// that the `web-push` npm package doesn't actually deliver messages when run
+// on Supabase's Deno Edge Runtime (FCM accepts the request, but the message
+// never reaches the browser). Revisit with email notifications instead;
+// see backend/README.md.

@@ -7,7 +7,6 @@ import { PALETTE, MONO_FONT, hexA } from '@/lib/palette';
 const C = PALETTE;
 const FEATURES = [
   '翌月以降のカレンダーをすべて閲覧',
-  '重要イベントの前日通知（ブラウザ）',
   'カレンダーをCSV・PDFで書き出し',
   'Googleカレンダーへ自動連携・同期',
   '絞り込み条件の保存・広告の非表示',

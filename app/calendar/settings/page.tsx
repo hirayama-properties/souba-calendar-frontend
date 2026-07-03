@@ -1,13 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useCalendarState } from '@/components/calendar/CalendarStateContext';
 import { useAuth } from '@/lib/useAuth';
 import { Toggle, SegmentedRow } from '@/components/calendar/SettingsControls';
 import GcalSyncPanel from '@/components/calendar/GcalSyncPanel';
-import { enablePushNotifications, disablePushNotifications } from '@/lib/usePushNotifications';
 import { PALETTE, TYPE_LABEL_LONG } from '@/lib/palette';
 import type { FilterKey } from '@/lib/types';
 
@@ -17,9 +15,7 @@ const FILTER_KEYS: FilterKey[] = ['cb', 'econ', 'sq', 'div', 'holiday'];
 export default function SettingsPage() {
   const router = useRouter();
   const { filters, toggleFilter, settings, setSetting, openPremium } = useCalendarState();
-  const { user, profile, isPremium, signOut, updateNotificationSettings } = useAuth();
-  const [notifyBusy, setNotifyBusy] = useState(false);
-  const [notifyError, setNotifyError] = useState<string | null>(null);
+  const { user, isPremium, signOut } = useAuth();
 
   const accountTitle = user ? user.email ?? 'ログイン中' : 'ゲストとして利用中';
   const accountSub = user ? 'ログイン中' : 'ログインすると通知・設定を保存できます';
@@ -30,33 +26,6 @@ export default function SettingsPage() {
   const planBadgeStyle: React.CSSProperties = isPremium
     ? { fontSize: '10.5px', fontWeight: 700, padding: '3px 10px', borderRadius: '6px', color: '#2a1e08', background: 'linear-gradient(135deg,#d8ae5b,#b8842f)' }
     : { fontSize: '10.5px', fontWeight: 700, padding: '3px 10px', borderRadius: '6px', color: '#6f6658', background: '#f1ece3' };
-
-  const notifyOn = isPremium && !!profile?.notify_enabled;
-  const handleNotifyToggle = async () => {
-    if (!isPremium) {
-      openPremium();
-      return;
-    }
-    if (!user) {
-      router.push('/login');
-      return;
-    }
-    setNotifyBusy(true);
-    setNotifyError(null);
-    try {
-      if (notifyOn) {
-        await disablePushNotifications();
-        await updateNotificationSettings({ notify_enabled: false });
-      } else {
-        await enablePushNotifications();
-        await updateNotificationSettings({ notify_enabled: true });
-      }
-    } catch (e) {
-      setNotifyError(e instanceof Error ? e.message : String(e));
-    } finally {
-      setNotifyBusy(false);
-    }
-  };
 
   const sectionTitleStyle: React.CSSProperties = { fontSize: '11px', fontWeight: 700, letterSpacing: '.14em', color: C.textLo, margin: '0 4px 10px' };
   const cardStyle: React.CSSProperties = { border: `1px solid ${C.border}`, borderRadius: '13px', background: '#fff', overflow: 'hidden' };
@@ -174,18 +143,15 @@ export default function SettingsPage() {
               <div>
                 <div style={{ fontSize: '13.5px', fontWeight: 600 }}>
                   重要イベントの前日通知
-                  {!isPremium && (
-                    <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '.1em', color: '#2a1e08', background: '#d8ae5b', padding: '3px 7px', borderRadius: '5px', marginLeft: '8px' }}>
-                      PRO
-                    </span>
-                  )}
+                  <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '.1em', color: '#6f6658', background: '#f1ece3', padding: '3px 7px', borderRadius: '5px', marginLeft: '8px' }}>
+                    準備中
+                  </span>
                 </div>
                 <div style={{ fontSize: '11.5px', color: C.textLo, marginTop: '3px' }}>
-                  {isPremium ? '★3のイベントを前営業日にブラウザ通知でお知らせします' : 'プレミアムで利用できます（ブラウザのプッシュ通知）'}
+                  現在開発中の機能です。近日公開予定。
                 </div>
-                {notifyError && <div style={{ fontSize: '11.5px', color: C.cb, marginTop: '5px' }}>{notifyError}</div>}
               </div>
-              <Toggle on={notifyOn} onToggle={handleNotifyToggle} disabled={notifyBusy} />
+              <Toggle on={false} onToggle={() => {}} disabled />
             </div>
           </div>
         </div>
