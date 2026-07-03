@@ -13,7 +13,7 @@ interface AuthContextValue {
   isPremium: boolean;
   signInWithPassword: (email: string, password: string) => Promise<string | null>;
   signUp: (email: string, password: string) => Promise<string | null>;
-  signInWithGoogle: () => Promise<void>;
+  signInWithGoogle: () => Promise<string | null>;
   signOut: () => Promise<void>;
   updateNotificationSettings: (
     patch: Partial<Pick<Profile, 'notify_enabled' | 'notify_min_importance'>>,
@@ -84,7 +84,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signInWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({
+    // signInWithOAuth navigates the browser away on success (no code after
+    // this point runs); only the error case returns control to the caller.
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
         scopes: 'https://www.googleapis.com/auth/calendar.events',
@@ -92,6 +94,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         redirectTo: `${window.location.origin}/calendar`,
       },
     });
+    if (error) {
+      console.error('[auth] signInWithOAuth(google) failed:', error);
+      return error.message;
+    }
+    return null;
   };
 
   const signOut = async () => {

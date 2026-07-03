@@ -101,7 +101,10 @@ export default function LoginPage() {
           </div>
 
           <button
-            onClick={signInWithGoogle}
+            onClick={async () => {
+              const err = await signInWithGoogle();
+              if (err) setError(err);
+            }}
             style={{
               width: '100%',
               display: 'flex',
