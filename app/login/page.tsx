@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/lib/useAuth';
 import { PALETTE } from '@/lib/palette';
+import { LEGAL_LINKS } from '@/lib/legalLinks';
 
 const C = PALETTE;
 
@@ -209,7 +210,15 @@ export default function LoginPage() {
           </button>
 
           <p style={{ fontSize: '10.5px', lineHeight: 1.7, color: C.textLo, textAlign: 'center', margin: '14px 0 0' }}>
-            続行することで、利用規約とプライバシーポリシーに
+            続行することで、
+            <a href={LEGAL_LINKS.terms} target="_blank" rel="noopener noreferrer" style={{ color: C.textLo, textDecoration: 'underline' }}>
+              利用規約
+            </a>
+            と
+            <a href={LEGAL_LINKS.privacy} target="_blank" rel="noopener noreferrer" style={{ color: C.textLo, textDecoration: 'underline' }}>
+              プライバシーポリシー
+            </a>
+            に
             <br />
             同意したものとみなされます。
           </p>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import HeroAgendaCard from './HeroAgendaCard';
 import { PALETTE, MONO_FONT } from '@/lib/palette';
+import { LEGAL_LINKS, CONTACT_MAILTO } from '@/lib/legalLinks';
 
 const C = PALETTE;
 
@@ -620,8 +621,12 @@ export default function LandingPage() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
               <div style={{ fontSize: '11px', fontWeight: 700, color: C.textLo, letterSpacing: '.1em' }}>運営</div>
-              <span style={{ fontSize: '12.5px', color: C.textMid }}>運営者情報</span>
-              <span style={{ fontSize: '12.5px', color: C.textMid }}>お問い合わせ</span>
+              <a href={LEGAL_LINKS.tokushoho} target="_blank" rel="noopener noreferrer" style={{ fontSize: '12.5px', color: C.textMid }}>
+                運営者情報
+              </a>
+              <a href={CONTACT_MAILTO} style={{ fontSize: '12.5px', color: C.textMid }}>
+                お問い合わせ
+              </a>
             </div>
           </div>
         </div>
@@ -640,9 +645,15 @@ export default function LandingPage() {
           >
             <span style={{ fontFamily: MONO_FONT, fontSize: '11px', color: C.textLo }}>© 2026 相場カレンダー</span>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '18px' }}>
-              <span style={{ fontSize: '11.5px', color: '#8a8170' }}>利用規約</span>
-              <span style={{ fontSize: '11.5px', color: '#8a8170' }}>プライバシーポリシー</span>
-              <span style={{ fontSize: '11.5px', color: '#8a8170' }}>特定商取引法に基づく表記</span>
+              <a href={LEGAL_LINKS.terms} target="_blank" rel="noopener noreferrer" style={{ fontSize: '11.5px', color: '#8a8170' }}>
+                利用規約
+              </a>
+              <a href={LEGAL_LINKS.privacy} target="_blank" rel="noopener noreferrer" style={{ fontSize: '11.5px', color: '#8a8170' }}>
+                プライバシーポリシー
+              </a>
+              <a href={LEGAL_LINKS.tokushoho} target="_blank" rel="noopener noreferrer" style={{ fontSize: '11.5px', color: '#8a8170' }}>
+                特定商取引法に基づく表記
+              </a>
             </div>
           </div>
         </div>
