@@ -17,7 +17,13 @@ const ibmPlexMono = IBM_Plex_Mono({
   subsets: ['latin'],
 });
 
+// Falls back to the current production URL; set NEXT_PUBLIC_SITE_URL in the
+// Cloudflare Worker's build environment variables instead of editing this
+// file if/when a custom domain is added later.
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://1d4b11e9-souba-calendar-frontend.hirayama-p-company.workers.dev';
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: '相場カレンダー | Market Calendar',
   description: '日米の政策会合・経済指標・SQ・配当の予定を、投資家のために1画面に。',
   openGraph: {

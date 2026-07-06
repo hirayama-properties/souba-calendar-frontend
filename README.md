@@ -26,12 +26,18 @@ npm run dev
 - 課金は未実装のため、「アップグレードする」ボタンは `is_premium` を書き換えず「近日対応予定」を表示するのみ。
 - エクスポート・Googleカレンダー連携・Web Push は実際に `backend/` の Edge Functions を呼ぶ（プロトタイプは全てモック）。
 
-## デプロイ関連 TODO
+## デプロイ
 
-- **`metadataBase` の設定**：本番ドメインが決まったら `app/layout.tsx` の `metadata` に
-  `metadataBase: new URL('https://本番ドメイン')` を追加する。OGP画像（`app/opengraph-image.tsx`）
-  など相対パスの絶対URL解決に必要（ローカルではNext.jsが自動フォールバックするため警告なしで動くが、
-  本番では明示しないとog:image等のURLが正しく解決されない場合がある）。
+- **ホスティング**：Cloudflare Workers（静的アセット配信、`wrangler.jsonc` 参照）。GitHubリポジトリ
+  （`hirayama-properties/souba-calendar-frontend`）に接続済みで、`main` へのpushで自動ビルド・デプロイされる。
+  - Build command: `npm run build` / Deploy command: `npx wrangler deploy`
+  - 環境変数（`NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`）はCloudflareダッシュボードの
+    Settings → Variables and secrets で設定（ビルド時にNext.jsへ埋め込まれるため、値を変えたら再デプロイが必要）。
+- **本番URL**：`https://1d4b11e9-souba-calendar-frontend.hirayama-p-company.workers.dev`
+- **`metadataBase`**：`app/layout.tsx` で `NEXT_PUBLIC_SITE_URL` 環境変数（未設定時は上記の本番URLにフォールバック）
+  から解決している。OGP画像（`app/opengraph-image.tsx`）など相対パスの絶対URL解決に必要。
+  **カスタムドメインを追加したら**、Cloudflareの環境変数に `NEXT_PUBLIC_SITE_URL` を新ドメインの値で追加して
+  再デプロイするだけでよい（コード変更不要）。
 
 ## 未検証（バックエンドのデプロイ後に確認が必要）
 
