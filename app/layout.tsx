@@ -20,6 +20,18 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: '相場カレンダー | Market Calendar',
   description: '日米の政策会合・経済指標・SQ・配当の予定を、投資家のために1画面に。',
+  openGraph: {
+    title: '相場カレンダー | Market Calendar',
+    description: '日米の政策会合・経済指標・SQ・配当の予定を、投資家のために1画面に。',
+    siteName: '相場カレンダー',
+    locale: 'ja_JP',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '相場カレンダー | Market Calendar',
+    description: '日米の政策会合・経済指標・SQ・配当の予定を、投資家のために1画面に。',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
