@@ -43,6 +43,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja" className={`${notoSansJp.variable} ${ibmPlexMono.variable}`}>
+      <head>
+        {/* Temporary marker to confirm a fresh build is actually being served
+            in production — remove once the stale-deploy issue is resolved. */}
+        <meta name="deploy-check" content="20260706A" />
+      </head>
       <body style={{ fontFamily: 'var(--font-noto-sans-jp), sans-serif' }}>
         <AuthProvider>{children}</AuthProvider>
       </body>
