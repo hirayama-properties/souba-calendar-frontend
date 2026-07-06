@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "souba-calendar-frontend",
+  "compatibility_date": "2026-07-06",
+  // Static-only Worker: no "main" entry point, just serves the Next.js
+  // static export (output: 'export' in next.config.ts) as-is.
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  }
+}
