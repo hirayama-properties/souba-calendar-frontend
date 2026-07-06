@@ -18,6 +18,7 @@ interface AuthContextValue {
   updateNotificationSettings: (
     patch: Partial<Pick<Profile, 'notify_enabled' | 'notify_min_importance'>>,
   ) => Promise<void>;
+  refreshProfile: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -30,7 +31,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const loadProfile = useCallback(async (userId: string) => {
     const { data, error } = await supabase
       .from('profiles')
-      .select('id, is_premium, notify_enabled, notify_min_importance')
+      .select('id, is_premium, notify_enabled, notify_min_importance, current_period_end')
       .eq('id', userId)
       .maybeSingle();
     if (error) console.error('[auth] failed to load profile:', error);
@@ -114,6 +115,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setProfile((p) => (p ? { ...p, ...patch } : p));
   };
 
+  const refreshProfile = async () => {
+    if (session?.user) await loadProfile(session.user.id);
+  };
+
   const value: AuthContextValue = {
     session,
     user: session?.user ?? null,
@@ -125,6 +130,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signInWithGoogle,
     signOut,
     updateNotificationSettings,
+    refreshProfile,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

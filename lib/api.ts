@@ -76,6 +76,35 @@ export async function gcalSync(params: EventsQuery): Promise<{ synced: number; t
   return res.json();
 }
 
+export class AlreadySubscribedError extends Error {
+  constructor() {
+    super('already_subscribed');
+  }
+}
+
+export async function createCheckoutSession(returnUrl: string): Promise<{ url: string }> {
+  const headers = await authHeaders();
+  const res = await fetch(functionUrl('stripe-checkout'), {
+    method: 'POST',
+    headers: { ...headers, 'content-type': 'application/json' },
+    body: JSON.stringify({ returnUrl }),
+  });
+  if (res.status === 409) throw new AlreadySubscribedError();
+  if (!res.ok) throw new Error(`stripe-checkout failed: HTTP ${res.status}`);
+  return res.json();
+}
+
+export async function createPortalSession(returnUrl: string): Promise<{ url: string }> {
+  const headers = await authHeaders();
+  const res = await fetch(functionUrl('stripe-portal'), {
+    method: 'POST',
+    headers: { ...headers, 'content-type': 'application/json' },
+    body: JSON.stringify({ returnUrl }),
+  });
+  if (!res.ok) throw new Error(`stripe-portal failed: HTTP ${res.status}`);
+  return res.json();
+}
+
 // Web Push (push-subscribe/notify-daily) was shelved — confirmed in testing
 // that the `web-push` npm package doesn't actually deliver messages when run
 // on Supabase's Deno Edge Runtime (FCM accepts the request, but the message

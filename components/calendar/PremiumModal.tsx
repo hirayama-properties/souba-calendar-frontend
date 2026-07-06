@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useCalendarState } from './CalendarStateContext';
 import { PALETTE, MONO_FONT, hexA } from '@/lib/palette';
+import { createCheckoutSession, AlreadySubscribedError } from '@/lib/api';
 
 const C = PALETTE;
 const FEATURES = [
@@ -14,9 +15,27 @@ const FEATURES = [
 
 export default function PremiumModal() {
   const { premiumOpen, closePremium } = useCalendarState();
-  const [comingSoon, setComingSoon] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   if (!premiumOpen) return null;
+
+  const handleUpgrade = async () => {
+    setLoading(true);
+    setErrorMsg(null);
+    try {
+      const returnUrl = `${window.location.origin}/calendar/settings`;
+      const { url } = await createCheckoutSession(returnUrl);
+      window.location.href = url;
+    } catch (e) {
+      setLoading(false);
+      if (e instanceof AlreadySubscribedError) {
+        setErrorMsg('すでにプレミアムをご利用中です。');
+      } else {
+        setErrorMsg('決済ページを開けませんでした。時間をおいて再度お試しください。');
+      }
+    }
+  };
 
   return (
     <div
@@ -98,7 +117,8 @@ export default function PremiumModal() {
           ))}
         </div>
         <button
-          onClick={() => setComingSoon(true)}
+          onClick={handleUpgrade}
+          disabled={loading}
           style={{
             width: '100%',
             padding: '13px',
@@ -108,14 +128,15 @@ export default function PremiumModal() {
             color: '#2a1e08',
             fontWeight: 700,
             fontSize: '14px',
-            cursor: 'pointer',
+            cursor: loading ? 'default' : 'pointer',
+            opacity: loading ? 0.7 : 1,
             fontFamily: 'inherit',
           }}
         >
-          アップグレードする
+          {loading ? '処理中...' : 'アップグレードする'}
         </button>
-        <div style={{ textAlign: 'center', fontSize: '11px', color: C.textLo, marginTop: '11px' }}>
-          {comingSoon ? '決済連携は近日対応予定です。もうしばらくお待ちください。' : '初月無料・いつでも解約可能'}
+        <div style={{ textAlign: 'center', fontSize: '11px', color: errorMsg ? '#c0392b' : C.textLo, marginTop: '11px' }}>
+          {errorMsg ?? 'いつでも解約可能'}
         </div>
       </div>
     </div>

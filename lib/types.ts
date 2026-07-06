@@ -45,6 +45,7 @@ export interface Profile {
   is_premium: boolean;
   notify_enabled: boolean;
   notify_min_importance: number;
+  current_period_end: string | null;
 }
 
 export type FilterKey = EventType;

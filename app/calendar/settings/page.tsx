@@ -1,21 +1,50 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { Suspense, useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useCalendarState } from '@/components/calendar/CalendarStateContext';
 import { useAuth } from '@/lib/useAuth';
 import { Toggle, SegmentedRow } from '@/components/calendar/SettingsControls';
 import GcalSyncPanel from '@/components/calendar/GcalSyncPanel';
+import { createPortalSession } from '@/lib/api';
 import { PALETTE, TYPE_LABEL_LONG } from '@/lib/palette';
 import type { FilterKey } from '@/lib/types';
 
 const C = PALETTE;
 const FILTER_KEYS: FilterKey[] = ['cb', 'econ', 'sq', 'div', 'holiday'];
 
-export default function SettingsPage() {
+function formatPeriodEnd(iso: string): string {
+  const d = new Date(iso);
+  return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
+}
+
+function SettingsPageInner() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { filters, toggleFilter, settings, setSetting, openPremium } = useCalendarState();
-  const { user, isPremium, signOut } = useAuth();
+  const { user, isPremium, profile, signOut, refreshProfile } = useAuth();
+  const [portalLoading, setPortalLoading] = useState(false);
+
+  useEffect(() => {
+    if (searchParams.get('checkout') !== 'success') return;
+    refreshProfile();
+    // Webhook may take a moment to land after the redirect back.
+    const t = setTimeout(refreshProfile, 2000);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
+
+  const handleManageSubscription = async () => {
+    setPortalLoading(true);
+    try {
+      const returnUrl = `${window.location.origin}/calendar/settings`;
+      const { url } = await createPortalSession(returnUrl);
+      window.location.href = url;
+    } catch {
+      setPortalLoading(false);
+    }
+  };
 
   const accountTitle = user ? user.email ?? 'ログイン中' : 'ゲストとして利用中';
   const accountSub = user ? 'ログイン中' : 'ログインすると通知・設定を保存できます';
@@ -62,9 +91,30 @@ export default function SettingsPage() {
               </button>
             </div>
             <div style={rowStyle}>
-              <div style={{ fontSize: '13.5px', fontWeight: 600 }}>現在のプラン</div>
+              <div>
+                <div style={{ fontSize: '13.5px', fontWeight: 600 }}>現在のプラン</div>
+                {isPremium && profile?.current_period_end && (
+                  <div style={{ fontSize: '11.5px', color: C.textLo, marginTop: '3px' }}>
+                    次回更新日: {formatPeriodEnd(profile.current_period_end)}
+                  </div>
+                )}
+              </div>
               <span style={planBadgeStyle}>{planLabel}</span>
             </div>
+            {isPremium && (
+              <div style={{ ...rowStyle, borderBottom: 'none' }}>
+                <div style={{ fontSize: '12.5px', color: C.textMid, lineHeight: 1.6, flex: 1, minWidth: '200px' }}>
+                  支払い方法の変更・解約はこちらから行えます。
+                </div>
+                <button
+                  onClick={handleManageSubscription}
+                  disabled={portalLoading}
+                  style={{ whiteSpace: 'nowrap', padding: '9px 16px', border: '1px solid #ddd6ca', borderRadius: '8px', background: '#fff', color: C.textMid, fontWeight: 600, fontSize: '12.5px', cursor: portalLoading ? 'default' : 'pointer', opacity: portalLoading ? 0.7 : 1, fontFamily: 'inherit' }}
+                >
+                  {portalLoading ? '処理中...' : 'サブスクリプション管理'}
+                </button>
+              </div>
+            )}
             {!isPremium && (
               <div style={{ ...rowStyle, borderBottom: 'none' }}>
                 <div style={{ fontSize: '12.5px', color: C.textMid, lineHeight: 1.6, flex: 1, minWidth: '200px' }}>
@@ -207,6 +257,14 @@ export default function SettingsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SettingsPage() {
+  return (
+    <Suspense fallback={null}>
+      <SettingsPageInner />
+    </Suspense>
   );
 }
 
