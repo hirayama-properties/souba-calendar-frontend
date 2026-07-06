@@ -20,7 +20,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 // Falls back to the current production URL; set NEXT_PUBLIC_SITE_URL in the
 // Cloudflare Worker's build environment variables instead of editing this
 // file if/when a custom domain is added later.
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://1d4b11e9-souba-calendar-frontend.hirayama-p-company.workers.dev';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://souba-calendar-frontend.hirayama-p-company.workers.dev';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -43,11 +43,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja" className={`${notoSansJp.variable} ${ibmPlexMono.variable}`}>
-      <head>
-        {/* Temporary marker to confirm a fresh build is actually being served
-            in production — remove once the stale-deploy issue is resolved. */}
-        <meta name="deploy-check" content="20260706A" />
-      </head>
       <body style={{ fontFamily: 'var(--font-noto-sans-jp), sans-serif' }}>
         <AuthProvider>{children}</AuthProvider>
       </body>

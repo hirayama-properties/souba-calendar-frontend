@@ -33,7 +33,9 @@ npm run dev
   - Build command: `npm run build` / Deploy command: `npx wrangler deploy`
   - 環境変数（`NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`）はCloudflareダッシュボードの
     Settings → Variables and secrets で設定（ビルド時にNext.jsへ埋め込まれるため、値を変えたら再デプロイが必要）。
-- **本番URL**：`https://1d4b11e9-souba-calendar-frontend.hirayama-p-company.workers.dev`
+- **本番URL**：`https://souba-calendar-frontend.hirayama-p-company.workers.dev`
+  （※ `<バージョンID>-souba-calendar-frontend...` のようにハッシュ接頭辞が付いたURLは、その特定バージョンに
+  固定されたプレビューURLで、再デプロイしても更新されない。常に最新版を見るにはハッシュ接頭辞なしのURLを使うこと）。
 - **`metadataBase`**：`app/layout.tsx` で `NEXT_PUBLIC_SITE_URL` 環境変数（未設定時は上記の本番URLにフォールバック）
   から解決している。OGP画像（`app/opengraph-image.tsx`）など相対パスの絶対URL解決に必要。
   **カスタムドメインを追加したら**、Cloudflareの環境変数に `NEXT_PUBLIC_SITE_URL` を新ドメインの値で追加して
