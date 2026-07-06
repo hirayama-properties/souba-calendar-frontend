@@ -4,6 +4,8 @@ import { PALETTE, TYPE_COLOR, TYPE_LABEL } from '@/lib/palette';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 export const alt = '相場カレンダー — 相場を動かすイベントを、ひと目で。';
+// Fixed design, no request-time data — safe to bake into the static export.
+export const dynamic = 'force-static';
 
 // Same CDN source as backend/supabase/functions/_shared/pdf.ts uses for its
 // PDF export font — fetched once per server lifetime, not bundled locally.
