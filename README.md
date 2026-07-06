@@ -26,6 +26,13 @@ npm run dev
 - 課金は未実装のため、「アップグレードする」ボタンは `is_premium` を書き換えず「近日対応予定」を表示するのみ。
 - エクスポート・Googleカレンダー連携・Web Push は実際に `backend/` の Edge Functions を呼ぶ（プロトタイプは全てモック）。
 
+## デプロイ関連 TODO
+
+- **`metadataBase` の設定**：本番ドメインが決まったら `app/layout.tsx` の `metadata` に
+  `metadataBase: new URL('https://本番ドメイン')` を追加する。OGP画像（`app/opengraph-image.tsx`）
+  など相対パスの絶対URL解決に必要（ローカルではNext.jsが自動フォールバックするため警告なしで動くが、
+  本番では明示しないとog:image等のURLが正しく解決されない場合がある）。
+
 ## 未検証（バックエンドのデプロイ後に確認が必要）
 
 - 実データでのカレンダー表示・無料/プレミアム閲覧制限
