@@ -83,8 +83,8 @@ export default function TopBar() {
       style={{
         display: 'flex',
         alignItems: 'center',
-        gap: '14px',
-        padding: '13px 22px',
+        gap: isMobile ? '8px' : '14px',
+        padding: isMobile ? '10px 12px' : '13px 22px',
         borderBottom: `1px solid ${C.border}`,
         flexShrink: 0,
         background: '#ffffff',
@@ -97,30 +97,42 @@ export default function TopBar() {
         <button onClick={prevMonth} style={navBtnStyle}>
           ‹
         </button>
-        <div style={{ minWidth: '128px', textAlign: 'center', fontSize: '17px', fontWeight: 700, letterSpacing: '.02em', color: '#211e19' }}>
+        <div
+          style={{
+            minWidth: isMobile ? '86px' : '128px',
+            textAlign: 'center',
+            fontSize: isMobile ? '14px' : '17px',
+            fontWeight: 700,
+            letterSpacing: '.02em',
+            color: '#211e19',
+            whiteSpace: 'nowrap',
+          }}
+        >
           {year}年 {month + 1}月
         </div>
         <button onClick={nextMonth} style={navBtnStyle}>
           ›
         </button>
-        <button
-          onClick={goToday}
-          style={{
-            marginLeft: '6px',
-            padding: '0 14px',
-            height: '32px',
-            border: '1px solid #ecd9ad',
-            background: '#fbf3e0',
-            color: C.gold,
-            borderRadius: '7px',
-            cursor: 'pointer',
-            fontSize: '12.5px',
-            fontWeight: 700,
-            fontFamily: 'inherit',
-          }}
-        >
-          今日
-        </button>
+        {!isMobile && (
+          <button
+            onClick={goToday}
+            style={{
+              marginLeft: '6px',
+              padding: '0 14px',
+              height: '32px',
+              border: '1px solid #ecd9ad',
+              background: '#fbf3e0',
+              color: C.gold,
+              borderRadius: '7px',
+              cursor: 'pointer',
+              fontSize: '12.5px',
+              fontWeight: 700,
+              fontFamily: 'inherit',
+            }}
+          >
+            今日
+          </button>
+        )}
       </div>
       <div style={{ flex: 1 }} />
       <div style={searchStyle}>
@@ -132,14 +144,19 @@ export default function TopBar() {
           style={{ background: 'transparent', border: 'none', outline: 'none', color: '#211e19', fontFamily: 'inherit', fontSize: '12.5px', width: '150px' }}
         />
       </div>
+      {isMobile && (
+        <button onClick={goToday} style={{ ...navBtnStyle, width: '32px', color: C.gold, borderColor: '#ecd9ad', background: '#fbf3e0', fontSize: '11px', fontWeight: 700 }}>
+          今日
+        </button>
+      )}
       <button
         onClick={() => handleExport('csv')}
         disabled={exporting}
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '7px',
-          padding: '0 14px',
+          gap: isMobile ? '4px' : '7px',
+          padding: isMobile ? '0 8px' : '0 14px',
           height: '32px',
           border: `1px solid ${C.border}`,
           background: '#ffffff',
@@ -150,16 +167,17 @@ export default function TopBar() {
           fontFamily: 'inherit',
           fontWeight: 500,
           opacity: exporting ? 0.6 : 1,
+          flexShrink: 0,
         }}
       >
-        <span>エクスポート</span>
+        <span>{isMobile ? 'CSV' : 'エクスポート'}</span>
         {!isPremium && (
           <span style={{ fontSize: '8.5px', fontWeight: 700, letterSpacing: '.1em', color: '#2a1e08', background: C.goldSoft, padding: '2px 5px', borderRadius: '4px' }}>
             PRO
           </span>
         )}
       </button>
-      {isPremium && (
+      {isPremium && !isMobile && (
         <button
           onClick={() => handleExport('pdf')}
           disabled={exporting}
@@ -185,19 +203,21 @@ export default function TopBar() {
         style={{
           display: 'flex',
           alignItems: 'center',
-          padding: '0 13px',
+          justifyContent: 'center',
+          padding: isMobile ? '0' : '0 13px',
+          width: isMobile ? '32px' : undefined,
           height: '32px',
           border: `1px solid ${C.border}`,
           background: '#ffffff',
           color: C.textMid,
           borderRadius: '7px',
-          fontSize: '12.5px',
+          fontSize: isMobile ? '15px' : '12.5px',
           fontFamily: 'inherit',
           fontWeight: 500,
           flexShrink: 0,
         }}
       >
-        設定
+        {isMobile ? '⚙' : '設定'}
       </Link>
     </div>
   );
