@@ -307,7 +307,7 @@ export default function LandingPage() {
           <h2 style={{ fontSize: '31px', lineHeight: 1.45, fontWeight: 700, margin: '13px 0 0', color: '#211e19' }}>
             投資家が
             <br />
-            「見るべき」だけを、ていねいに。
+            「見るべき」だけを。
           </h2>
           <p style={{ fontSize: '14px', lineHeight: 1.85, color: C.textMid, margin: '14px 0 0' }}>
             ニュースの洪水ではなく、相場に効くイベントだけ。判断に必要な情報を、過不足なくまとめています。
