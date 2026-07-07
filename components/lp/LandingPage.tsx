@@ -512,7 +512,7 @@ export default function LandingPage() {
             >
               アップグレード
             </Link>
-            <div style={{ textAlign: 'center', fontSize: '11px', color: C.textLo, marginTop: '11px' }}>初月無料・いつでも解約可能</div>
+            <div style={{ textAlign: 'center', fontSize: '11px', color: C.textLo, marginTop: '11px' }}>いつでも解約可能</div>
           </div>
         </div>
       </section>
@@ -536,10 +536,14 @@ export default function LandingPage() {
             q="スマートフォンでも使えますか？"
             a="はい。スマートフォン・タブレット・PCのいずれのブラウザからもご利用いただけます。アプリのインストールは不要です。"
           />
-          <FaqItem q="解約はできますか？" a="いつでも解約できます。初月は無料で、期間中はすべてのプレミアム機能をお試しいただけます。" />
+          <FaqItem q="解約はできますか？" a="いつでも解約できます。解約後も、既に支払い済みの期間の終了まではプレミアム機能をご利用いただけます。" />
           <FaqItem
             q="情報の正確性は？"
             a="公的機関や取引所の公表スケジュールをもとに掲載しています。予定は変更される場合があるため、最終的な確認は各機関の公式発表をご参照ください。"
+          />
+          <FaqItem
+            q="予定はいつまで先まで見られますか？"
+            a="中央銀行の政策会合・SQ・配当の権利日は例年1年分をあらかじめ登録しています。経済指標の発表予定は、直近90日先まで毎日自動で更新しています。"
           />
         </div>
       </section>
