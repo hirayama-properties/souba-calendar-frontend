@@ -43,6 +43,10 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
   },
+  // AdSense's site-ownership check (separate from actually serving ads,
+  // which stays off until NEXT_PUBLIC_ADSENSE_CLIENT_ID is set post-approval
+  // — see lib/adsense.ts).
+  other: { 'google-adsense-account': 'ca-pub-8054486833130306' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
