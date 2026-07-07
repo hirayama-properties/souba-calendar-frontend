@@ -55,7 +55,7 @@ function EventCard({ ev }: { ev: DisplayEvent }) {
         )}
       </div>
       <div style={{ fontSize: '15px', fontWeight: 700, marginTop: '11px', lineHeight: 1.5, color: C.textHi }}>
-        {ev.title}
+        {ev.short_title || ev.title}
         {ev.details?.sub && (
           <span style={{ fontSize: '10px', color: C.gold, border: `1px solid ${hexA(C.gold, 0.45)}`, borderRadius: '4px', padding: '1px 6px', marginLeft: '7px' }}>
             {ev.details.sub}
