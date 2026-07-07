@@ -53,3 +53,24 @@ a {
 input::placeholder {
   color: #a8a092;
 }
+
+/* LP mobile layout — the rest of the app is inline-styled per the prototype,
+   but that leaves no room for breakpoints, so these overrides (!important
+   is intentional here, not a mistake) narrow the header/hero for phones. */
+@media (max-width: 640px) {
+  .lp-header-row {
+    gap: 12px !important;
+    padding: 0 16px !important;
+  }
+  .lp-header-nav,
+  .lp-header-login,
+  .lp-header-sub {
+    display: none !important;
+  }
+  .lp-hero-section {
+    padding: 40px 20px 32px !important;
+  }
+  .lp-hero-heading {
+    font-size: 34px !important;
+  }
+}

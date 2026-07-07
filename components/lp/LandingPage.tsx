@@ -87,6 +87,7 @@ export default function LandingPage() {
         }}
       >
         <div
+          className="lp-header-row"
           style={{
             maxWidth: '1140px',
             margin: '0 auto',
@@ -97,7 +98,7 @@ export default function LandingPage() {
             gap: '30px',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '11px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '11px', minWidth: 0 }}>
             <div
               style={{
                 width: '34px',
@@ -115,12 +116,12 @@ export default function LandingPage() {
             >
               相
             </div>
-            <div>
+            <div style={{ minWidth: 0, whiteSpace: 'nowrap' }}>
               <div style={{ fontSize: '15.5px', fontWeight: 700, letterSpacing: '.03em', lineHeight: 1.2 }}>相場カレンダー</div>
-              <div style={{ fontSize: '9px', color: C.textLo, letterSpacing: '.16em', marginTop: '1px' }}>MARKET CALENDAR</div>
+              <div className="lp-header-sub" style={{ fontSize: '9px', color: C.textLo, letterSpacing: '.16em', marginTop: '1px' }}>MARKET CALENDAR</div>
             </div>
           </div>
-          <nav style={{ display: 'flex', gap: '24px', marginLeft: '14px', flexWrap: 'wrap' }}>
+          <nav className="lp-header-nav" style={{ display: 'flex', gap: '24px', marginLeft: '14px', flexWrap: 'wrap' }}>
             <a href="#features" style={{ fontSize: '13px', color: C.textMid, whiteSpace: 'nowrap' }}>機能</a>
             <a href="#coverage" style={{ fontSize: '13px', color: C.textMid, whiteSpace: 'nowrap' }}>収録イベント</a>
             <a href="#pricing" style={{ fontSize: '13px', color: C.textMid, whiteSpace: 'nowrap' }}>料金</a>
@@ -129,6 +130,7 @@ export default function LandingPage() {
           <div style={{ flex: 1 }} />
           <Link
             href="/login"
+            className="lp-header-login"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -166,6 +168,7 @@ export default function LandingPage() {
       </header>
 
       <section
+        className="lp-hero-section"
         style={{
           maxWidth: '1140px',
           margin: '0 auto',
@@ -176,7 +179,7 @@ export default function LandingPage() {
           alignItems: 'center',
         }}
       >
-        <div style={{ flex: '1 1 380px', minWidth: '300px' }}>
+        <div style={{ flex: '1 1 380px', minWidth: '280px' }}>
           <div
             style={{
               display: 'inline-flex',
@@ -196,6 +199,7 @@ export default function LandingPage() {
             日本株・米国株 投資家のためのカレンダー
           </div>
           <h1
+            className="lp-hero-heading"
             style={{
               fontSize: '50px',
               lineHeight: 1.22,
@@ -205,9 +209,9 @@ export default function LandingPage() {
               color: '#211e19',
             }}
           >
-            相場を動かすイベントを、
+            相場を動かす
             <br />
-            ひと目で。
+            イベントを、ひと目で。
           </h1>
           <p style={{ fontSize: '15.5px', lineHeight: 1.85, color: C.textMid, margin: '20px 0 0', maxWidth: '482px' }}>
             FOMC・日銀会合・米雇用統計・CPI・SQ・配当の権利日まで。日米の重要スケジュールを
@@ -250,7 +254,7 @@ export default function LandingPage() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginTop: '18px', fontSize: '12px', color: C.textLo }}>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ color: C.div }}>✓</span> クレジットカード不要
+              <span style={{ color: C.div }}>✓</span> 登録不要
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <span style={{ color: C.div }}>✓</span> 当月分は無料で利用可能
