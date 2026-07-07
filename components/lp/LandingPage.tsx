@@ -201,7 +201,7 @@ export default function LandingPage() {
           <h1
             className="lp-hero-heading"
             style={{
-              fontSize: '50px',
+              fontSize: '58px',
               lineHeight: 1.22,
               fontWeight: 700,
               letterSpacing: '.01em',
@@ -305,7 +305,9 @@ export default function LandingPage() {
             FEATURES
           </div>
           <h2 style={{ fontSize: '31px', lineHeight: 1.45, fontWeight: 700, margin: '13px 0 0', color: '#211e19' }}>
-            投資家が「見るべき」だけを、ていねいに。
+            投資家が
+            <br />
+            「見るべき」だけを、ていねいに。
           </h2>
           <p style={{ fontSize: '14px', lineHeight: 1.85, color: C.textMid, margin: '14px 0 0' }}>
             ニュースの洪水ではなく、相場に効くイベントだけ。判断に必要な情報を、過不足なくまとめています。
@@ -370,7 +372,9 @@ export default function LandingPage() {
               COVERAGE
             </div>
             <h2 style={{ fontSize: '31px', lineHeight: 1.45, fontWeight: 700, margin: '13px 0 0', color: '#211e19' }}>
-              5つのカテゴリで、相場の節目を網羅。
+              5つのカテゴリで、
+              <br />
+              相場の節目を網羅。
             </h2>
             <p style={{ fontSize: '14px', lineHeight: 1.85, color: C.textMid, margin: '14px 0 0' }}>
               いずれも投資判断に直結するイベント。色分けされているので、カレンダー上でも瞬時に見分けられます。
@@ -409,7 +413,9 @@ export default function LandingPage() {
             PRICING
           </div>
           <h2 style={{ fontSize: '31px', lineHeight: 1.45, fontWeight: 700, margin: '13px 0 0', color: '#211e19' }}>
-            まずは無料で。必要になったら年¥980。
+            まずは無料で。
+            <br />
+            年¥980でさらに。
           </h2>
           <p style={{ fontSize: '14px', lineHeight: 1.85, color: C.textMid, margin: '14px 0 0' }}>
             当月分のカレンダーはずっと無料。先の予定を見たくなったら、年額¥980でアップグレードできます。
@@ -565,7 +571,11 @@ export default function LandingPage() {
             overflow: 'hidden',
           }}
         >
-          <div style={{ fontSize: '28px', lineHeight: 1.5, fontWeight: 700, color: '#fdf6e8' }}>次の相場の節目を、見逃さない。</div>
+          <div style={{ fontSize: '28px', lineHeight: 1.5, fontWeight: 700, color: '#fdf6e8' }}>
+            次の相場の節目を、
+            <br />
+            見逃さない。
+          </div>
           <p style={{ fontSize: '14px', lineHeight: 1.8, color: '#d8cdb8', margin: '14px auto 0', maxWidth: '440px' }}>
             登録は不要。今すぐカレンダーを開いて、今月の重要イベントを確認できます。
           </p>
