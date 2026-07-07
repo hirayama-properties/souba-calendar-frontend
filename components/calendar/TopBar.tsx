@@ -177,12 +177,12 @@ export default function TopBar() {
           </span>
         )}
       </button>
-      {isPremium && !isMobile && (
+      {isPremium && (
         <button
           onClick={() => handleExport('pdf')}
           disabled={exporting}
           style={{
-            padding: '0 12px',
+            padding: isMobile ? '0 8px' : '0 12px',
             height: '32px',
             border: `1px solid ${C.border}`,
             background: '#ffffff',
@@ -193,6 +193,7 @@ export default function TopBar() {
             fontFamily: 'inherit',
             fontWeight: 500,
             opacity: exporting ? 0.6 : 1,
+            flexShrink: 0,
           }}
         >
           PDF
