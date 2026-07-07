@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useCalendarState } from './CalendarStateContext';
+import { useAuth } from '@/lib/useAuth';
 import { PALETTE, MONO_FONT, hexA } from '@/lib/palette';
 import { createCheckoutSession, AlreadySubscribedError } from '@/lib/api';
 
@@ -14,13 +16,20 @@ const FEATURES = [
 ];
 
 export default function PremiumModal() {
+  const router = useRouter();
   const { premiumOpen, closePremium } = useCalendarState();
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   if (!premiumOpen) return null;
 
   const handleUpgrade = async () => {
+    if (!user) {
+      closePremium();
+      router.push('/login');
+      return;
+    }
     setLoading(true);
     setErrorMsg(null);
     try {
@@ -133,7 +142,7 @@ export default function PremiumModal() {
             fontFamily: 'inherit',
           }}
         >
-          {loading ? '処理中...' : 'アップグレードする'}
+          {loading ? '処理中...' : user ? 'アップグレードする' : 'ログインしてアップグレード'}
         </button>
         <div style={{ textAlign: 'center', fontSize: '11px', color: errorMsg ? '#c0392b' : C.textLo, marginTop: '11px' }}>
           {errorMsg ?? 'いつでも解約可能'}
