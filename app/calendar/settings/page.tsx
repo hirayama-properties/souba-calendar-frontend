@@ -8,6 +8,8 @@ import { useAuth } from '@/lib/useAuth';
 import { Toggle, SegmentedRow } from '@/components/calendar/SettingsControls';
 import GcalSyncPanel from '@/components/calendar/GcalSyncPanel';
 import GcalColorPicker from '@/components/calendar/GcalColorPicker';
+import AdSlot from '@/components/AdSlot';
+import { AD_SLOTS } from '@/lib/adsense';
 import { createPortalSession } from '@/lib/api';
 import { PALETTE, TYPE_LABEL_LONG } from '@/lib/palette';
 import type { FilterKey } from '@/lib/types';
@@ -259,6 +261,8 @@ function SettingsPageInner() {
             </div>
           </div>
         </div>
+
+        {!isPremium && <AdSlot slot={AD_SLOTS.settingsBottom} style={{ minHeight: '90px' }} />}
       </div>
     </div>
   );

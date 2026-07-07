@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Noto_Sans_JP, IBM_Plex_Mono } from 'next/font/google';
 import { AuthProvider } from '@/lib/useAuth';
 import { SITE_URL } from '@/lib/siteUrl';
+import { ADSENSE_CLIENT_ID } from '@/lib/adsense';
 import './globals.css';
 
 // Same families/weights as the prototype's Google Fonts <link> (相場カレンダー.dc.html
@@ -47,6 +49,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja" className={`${notoSansJp.variable} ${ibmPlexMono.variable}`}>
       <body style={{ fontFamily: 'var(--font-noto-sans-jp), sans-serif' }}>
+        {ADSENSE_CLIENT_ID && (
+          <Script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        )}
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

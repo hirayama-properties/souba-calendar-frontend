@@ -9,6 +9,8 @@ import { fetchEvents } from '@/lib/api';
 import { monthCount } from '@/lib/eventView';
 import { isoLocal } from '@/lib/dateFormat';
 import { PALETTE, TYPE_LABEL_LONG, hexA, MONO_FONT } from '@/lib/palette';
+import AdSlot from '@/components/AdSlot';
+import { AD_SLOTS } from '@/lib/adsense';
 import type { EventRow, FilterKey } from '@/lib/types';
 
 const C = PALETTE;
@@ -141,6 +143,10 @@ export default function Sidebar() {
           <span style={{ fontFamily: MONO_FONT, fontSize: '12px', color: C.gold, whiteSpace: 'nowrap' }}>{nextEventDate}</span>
           <span style={{ fontSize: '12px', color: C.textMid, lineHeight: 1.35 }}>{nextEventTitle}</span>
         </div>
+      </div>
+
+      <div style={{ marginTop: '16px' }}>
+        <AdSlot slot={AD_SLOTS.sidebar} style={{ minHeight: '250px' }} />
       </div>
 
       <div style={{ flex: 1 }} />

@@ -45,6 +45,18 @@ npm run dev
   更新済み（workers.dev時代の設定のままだとGoogleログインが失敗する——実際にこの順で発生し、修正した）。
   今後さらにドメインを追加/変更する場合はここも忘れず更新すること。
 
+## 広告（Google AdSense）
+
+`components/AdSlot.tsx` が無料プランのユーザーにのみ広告枠を表示する（`lib/adsense.ts` の
+`ADSENSE_CLIENT_ID` が未設定の間は何も描画しない＝審査前でも安全にデプロイできる）。設置箇所：
+- カレンダー画面のサイドバー（`components/calendar/Sidebar.tsx`、フィルタ一覧とプレミアム案内の間）
+- 設定画面の最下部（`app/calendar/settings/page.tsx`）
+
+**AdSense審査通過後にやること：**
+1. Cloudflareの環境変数に `NEXT_PUBLIC_ADSENSE_CLIENT_ID`（`ca-pub-...`）を追加して再デプロイ
+2. AdSenseダッシュボードで広告ユニットを作成し、`lib/adsense.ts` の `AD_SLOTS`（現在は仮のプレースホルダー値）を実際のスロットIDに差し替え
+3. `public/ads.txt` を実際の値（`google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0`）で作成（AdSense側の「サイトの管理」に案内あり）
+
 ## 実プロジェクトでの検証状況
 
 - ✅ 実データでのカレンダー表示・無料/プレミアム閲覧制限
