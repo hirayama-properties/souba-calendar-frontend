@@ -212,8 +212,8 @@ function SettingsPageInner() {
             {isPremium ? (
               <div style={{ borderBottom: '1px solid #f1ece3' }}>
                 <div style={{ padding: '15px 18px 0', fontSize: '13.5px', fontWeight: 600 }}>Googleカレンダー連携</div>
-                <div style={{ fontSize: '11.5px', color: C.textLo, padding: '4px 18px 0' }}>
-                  お使いのGoogleカレンダー（メイン）に予定を追加します。
+                <div style={{ fontSize: '11.5px', color: C.textLo, padding: '4px 18px 0', lineHeight: 1.6 }}>
+                  お使いのGoogleカレンダー（メイン）に予定を追加します。連携中は今後90日分の予定が毎日自動で最新の状態に更新されます。期間やカテゴリを指定してすぐ同期したい場合は下のボタンから。
                 </div>
                 <GcalSyncPanel onNeedsPremium={openPremium} />
               </div>
