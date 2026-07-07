@@ -658,7 +658,9 @@ export default function LandingPage() {
               <div style={{ fontSize: '14.5px', fontWeight: 700, letterSpacing: '.03em' }}>相場カレンダー</div>
             </div>
             <p style={{ fontSize: '12px', lineHeight: 1.8, color: '#8a8170', margin: '14px 0 0' }}>
-              日米の政策会合・経済指標・SQ・配当の予定を、投資家のために1画面に。
+              日米の政策会合・経済指標・SQ・配当の予定を、
+              <br />
+              投資家のために1画面に。
             </p>
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '44px' }}>
