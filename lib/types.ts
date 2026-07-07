@@ -46,6 +46,8 @@ export interface Profile {
   notify_enabled: boolean;
   notify_min_importance: number;
   current_period_end: string | null;
+  /** event type -> Google Calendar colorId ('1'-'11'); unset types use Google's default. */
+  gcal_color_map: Partial<Record<EventType, string>> | null;
 }
 
 export type FilterKey = EventType;

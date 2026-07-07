@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import type { Session, User } from '@supabase/supabase-js';
 import { supabase } from './supabaseClient';
-import type { Profile } from './types';
+import type { EventType, Profile } from './types';
 
 interface AuthContextValue {
   session: Session | null;
@@ -18,6 +18,7 @@ interface AuthContextValue {
   updateNotificationSettings: (
     patch: Partial<Pick<Profile, 'notify_enabled' | 'notify_min_importance'>>,
   ) => Promise<void>;
+  updateGcalColor: (type: EventType, colorId: string) => Promise<void>;
   refreshProfile: () => Promise<void>;
 }
 
@@ -31,7 +32,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const loadProfile = useCallback(async (userId: string) => {
     const { data, error } = await supabase
       .from('profiles')
-      .select('id, is_premium, notify_enabled, notify_min_importance, current_period_end')
+      .select('id, is_premium, notify_enabled, notify_min_importance, current_period_end, gcal_color_map')
       .eq('id', userId)
       .maybeSingle();
     if (error) console.error('[auth] failed to load profile:', error);
@@ -115,6 +116,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setProfile((p) => (p ? { ...p, ...patch } : p));
   };
 
+  const updateGcalColor = async (type: EventType, colorId: string) => {
+    if (!session?.user) return;
+    const nextMap = { ...(profile?.gcal_color_map ?? {}), [type]: colorId };
+    const { error } = await supabase.from('profiles').update({ gcal_color_map: nextMap }).eq('id', session.user.id);
+    if (error) throw error;
+    setProfile((p) => (p ? { ...p, gcal_color_map: nextMap } : p));
+  };
+
   const refreshProfile = async () => {
     if (session?.user) await loadProfile(session.user.id);
   };
@@ -130,6 +139,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signInWithGoogle,
     signOut,
     updateNotificationSettings,
+    updateGcalColor,
     refreshProfile,
   };
 

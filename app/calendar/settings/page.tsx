@@ -7,6 +7,7 @@ import { useCalendarState } from '@/components/calendar/CalendarStateContext';
 import { useAuth } from '@/lib/useAuth';
 import { Toggle, SegmentedRow } from '@/components/calendar/SettingsControls';
 import GcalSyncPanel from '@/components/calendar/GcalSyncPanel';
+import GcalColorPicker from '@/components/calendar/GcalColorPicker';
 import { createPortalSession } from '@/lib/api';
 import { PALETTE, TYPE_LABEL_LONG } from '@/lib/palette';
 import type { FilterKey } from '@/lib/types';
@@ -216,6 +217,9 @@ function SettingsPageInner() {
                   お使いのGoogleカレンダー（メイン）に予定を追加します。連携中は今後90日分の予定が毎日自動で最新の状態に更新されます。期間やカテゴリを指定してすぐ同期したい場合は下のボタンから。
                 </div>
                 <GcalSyncPanel onNeedsPremium={openPremium} />
+                <div style={{ borderTop: '1px solid #f1ece3' }}>
+                  <GcalColorPicker />
+                </div>
               </div>
             ) : (
               <div onClick={openPremium} style={{ ...rowStyle, cursor: 'pointer' }}>
