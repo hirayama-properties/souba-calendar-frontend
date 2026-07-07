@@ -211,7 +211,9 @@ export default function LandingPage() {
           >
             相場を動かす
             <br />
-            イベントを、ひと目で。
+            イベントを、
+            <br />
+            ひと目で。
           </h1>
           <p style={{ fontSize: '15.5px', lineHeight: 1.85, color: C.textMid, margin: '20px 0 0', maxWidth: '482px' }}>
             FOMC・日銀会合・米雇用統計・CPI・SQ・配当の権利日まで。日米の重要スケジュールを
