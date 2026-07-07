@@ -1,9 +1,44 @@
 import Link from 'next/link';
 import HeroAgendaCard from './HeroAgendaCard';
 import { PALETTE, MONO_FONT } from '@/lib/palette';
-import { LEGAL_LINKS, CONTACT_MAILTO } from '@/lib/legalLinks';
+import { LEGAL_LINKS, CONTACT_MAILTO, CONTACT_EMAIL } from '@/lib/legalLinks';
+import { SITE_URL } from '@/lib/siteUrl';
 
 const C = PALETTE;
+
+// Rich-result hints for search engines: what this is (SoftwareApplication,
+// with the actual premium price so it can surface in shopping/price-aware
+// results) and who publishes it (matches the entity on the 特定商取引法 page).
+const JSON_LD = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'SoftwareApplication',
+      name: '相場カレンダー',
+      url: SITE_URL,
+      applicationCategory: 'FinanceApplication',
+      operatingSystem: 'Web',
+      description: 'FOMC・日銀会合・米雇用統計・CPI・SQ・配当の権利日まで、日米の重要スケジュールを1つのカレンダーに集約する投資家向けカレンダー。',
+      offers: {
+        '@type': 'Offer',
+        price: '980',
+        priceCurrency: 'JPY',
+        name: 'プレミアムプラン（年額）',
+      },
+    },
+    {
+      '@type': 'WebSite',
+      name: '相場カレンダー',
+      url: SITE_URL,
+    },
+    {
+      '@type': 'Organization',
+      name: 'Hirayama Properties Co., Ltd.',
+      url: SITE_URL,
+      email: CONTACT_EMAIL,
+    },
+  ],
+};
 
 function FeatureCard({ icon, title, body }: { icon: React.ReactNode; title: string; body: string }) {
   return (
@@ -76,6 +111,7 @@ export default function LandingPage() {
         WebkitFontSmoothing: 'antialiased',
       }}
     >
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
       <header
         style={{
           position: 'sticky',

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_JP, IBM_Plex_Mono } from 'next/font/google';
 import { AuthProvider } from '@/lib/useAuth';
+import { SITE_URL } from '@/lib/siteUrl';
 import './globals.css';
 
 // Same families/weights as the prototype's Google Fonts <link> (相場カレンダー.dc.html
@@ -17,26 +18,28 @@ const ibmPlexMono = IBM_Plex_Mono({
   subsets: ['latin'],
 });
 
-// Falls back to the current production URL; set NEXT_PUBLIC_SITE_URL in the
-// Cloudflare Worker's build environment variables instead of editing this
-// file if/when a custom domain is added later.
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://souba-calendar-frontend.hirayama-p-company.workers.dev';
+const TITLE = '相場カレンダー | 日米の政策会合・経済指標・SQ・配当日カレンダー';
+const DESCRIPTION =
+  'FOMC・日銀会合・米雇用統計・CPI・SQ・配当の権利日まで、日米の重要スケジュールを1つのカレンダーに集約。投資家のための無料カレンダーアプリです。';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: '相場カレンダー | Market Calendar',
-  description: '日米の政策会合・経済指標・SQ・配当の予定を、投資家のために1画面に。',
+  title: { default: TITLE, template: '%s | 相場カレンダー' },
+  description: DESCRIPTION,
+  keywords: ['相場カレンダー', 'FOMC', '日銀会合', '経済指標', 'CPI', 'SQ', '配当権利日', '投資カレンダー', '株式投資'],
+  alternates: { canonical: '/' },
   openGraph: {
-    title: '相場カレンダー | Market Calendar',
-    description: '日米の政策会合・経済指標・SQ・配当の予定を、投資家のために1画面に。',
+    title: TITLE,
+    description: DESCRIPTION,
     siteName: '相場カレンダー',
     locale: 'ja_JP',
     type: 'website',
+    url: SITE_URL,
   },
   twitter: {
     card: 'summary_large_image',
-    title: '相場カレンダー | Market Calendar',
-    description: '日米の政策会合・経済指標・SQ・配当の予定を、投資家のために1画面に。',
+    title: TITLE,
+    description: DESCRIPTION,
   },
 };
 
