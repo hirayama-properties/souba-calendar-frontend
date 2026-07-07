@@ -23,7 +23,7 @@ npm run dev
 
 - `view` state を実ルーティングに分割（`/`, `/calendar`, `/calendar/settings`, `/login`）。
 - 選択中の日付は `?date=YYYY-MM-DD` に保持（共有・戻るボタンに対応）。
-- 課金は未実装のため、「アップグレードする」ボタンは `is_premium` を書き換えず「近日対応予定」を表示するのみ。
+- 「アップグレードする」ボタンは `stripe-checkout` を呼んでStripe Checkoutにリダイレクトする（`lib/api.ts` の `createCheckoutSession`）。設定画面の「サブスクリプション管理」は `stripe-portal` 経由でカスタマーポータルへ。
 - エクスポート・Googleカレンダー連携・Web Push は実際に `backend/` の Edge Functions を呼ぶ（プロトタイプは全てモック）。
 
 ## デプロイ
@@ -41,11 +41,14 @@ npm run dev
   **カスタムドメインを追加したら**、Cloudflareの環境変数に `NEXT_PUBLIC_SITE_URL` を新ドメインの値で追加して
   再デプロイするだけでよい（コード変更不要）。
 
-## 未検証（バックエンドのデプロイ後に確認が必要）
+## 実プロジェクトでの検証状況
 
-- 実データでのカレンダー表示・無料/プレミアム閲覧制限
-- Google連携（`signInWithGoogle` のスコープ・`google_calendar_tokens` への保存 → `gcal-sync`）
-- Web Push 購読 → `notify-daily` からの実際の通知受信（`public/sw.js`）
-- CSV/PDF エクスポートのダウンロード
+- ✅ 実データでのカレンダー表示・無料/プレミアム閲覧制限
+- ✅ Google連携（`signInWithGoogle`）：本番ドメインへのデプロイ後、SupabaseのAuth設定（Site URL / Redirect URLs）が
+  ローカル開発時の`localhost:3000`のままだったため一度ログインが失敗した。本番URLに更新して解決済み——
+  カスタムドメインを追加した際も同様にこの設定を更新すること。
+- ✅ Stripe決済（テストモード）：実際にテストカードで決済→プレミアム反映→カスタマーポータルでの解約まで確認済み。詳細は`backend/README.md`。
+- ✅ CSV/PDF エクスポートのダウンロード
+- Web Push 購読は`backend/README.md`記載の通りshelved（`npm:web-push`がDeno上で動作しないため）。
 
 `npx tsc --noEmit` / `npx eslint .` / `npm run build` はいずれもこのリポジトリの状態でパス済み。
