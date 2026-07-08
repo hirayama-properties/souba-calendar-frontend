@@ -679,9 +679,9 @@ export default function LandingPage() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
               <div style={{ fontSize: '11px', fontWeight: 700, color: C.textLo, letterSpacing: '.1em' }}>運営</div>
-              <a href={LEGAL_LINKS.tokushoho} target="_blank" rel="noopener noreferrer" style={{ fontSize: '12.5px', color: C.textMid }}>
+              <Link href={LEGAL_LINKS.tokushoho} style={{ fontSize: '12.5px', color: C.textMid }}>
                 運営者情報
-              </a>
+              </Link>
               <a href={CONTACT_MAILTO} style={{ fontSize: '12.5px', color: C.textMid }}>
                 お問い合わせ
               </a>
@@ -709,15 +709,15 @@ export default function LandingPage() {
           >
             <span style={{ fontFamily: MONO_FONT, fontSize: '11px', color: C.textLo }}>© 2026 相場カレンダー</span>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '18px' }}>
-              <a href={LEGAL_LINKS.terms} target="_blank" rel="noopener noreferrer" style={{ fontSize: '11.5px', color: '#8a8170' }}>
+              <Link href={LEGAL_LINKS.terms} style={{ fontSize: '11.5px', color: '#8a8170' }}>
                 利用規約
-              </a>
-              <a href={LEGAL_LINKS.privacy} target="_blank" rel="noopener noreferrer" style={{ fontSize: '11.5px', color: '#8a8170' }}>
+              </Link>
+              <Link href={LEGAL_LINKS.privacy} style={{ fontSize: '11.5px', color: '#8a8170' }}>
                 プライバシーポリシー
-              </a>
-              <a href={LEGAL_LINKS.tokushoho} target="_blank" rel="noopener noreferrer" style={{ fontSize: '11.5px', color: '#8a8170' }}>
+              </Link>
+              <Link href={LEGAL_LINKS.tokushoho} style={{ fontSize: '11.5px', color: '#8a8170' }}>
                 特定商取引法に基づく表記
-              </a>
+              </Link>
             </div>
           </div>
         </div>

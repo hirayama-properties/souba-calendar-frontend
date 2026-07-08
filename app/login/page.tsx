@@ -211,13 +211,13 @@ export default function LoginPage() {
 
           <p style={{ fontSize: '10.5px', lineHeight: 1.7, color: C.textLo, textAlign: 'center', margin: '14px 0 0' }}>
             続行することで、
-            <a href={LEGAL_LINKS.terms} target="_blank" rel="noopener noreferrer" style={{ color: C.textLo, textDecoration: 'underline' }}>
+            <Link href={LEGAL_LINKS.terms} style={{ color: C.textLo, textDecoration: 'underline' }}>
               利用規約
-            </a>
+            </Link>
             と
-            <a href={LEGAL_LINKS.privacy} target="_blank" rel="noopener noreferrer" style={{ color: C.textLo, textDecoration: 'underline' }}>
+            <Link href={LEGAL_LINKS.privacy} style={{ color: C.textLo, textDecoration: 'underline' }}>
               プライバシーポリシー
-            </a>
+            </Link>
             に
             <br />
             同意したものとみなされます。

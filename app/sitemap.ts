@@ -12,5 +12,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: SITE_URL, changeFrequency: 'daily', priority: 1 },
     { url: `${SITE_URL}/calendar`, changeFrequency: 'daily', priority: 0.9 },
     { url: `${SITE_URL}/login`, changeFrequency: 'monthly', priority: 0.3 },
+    { url: `${SITE_URL}/legal/terms`, changeFrequency: 'yearly', priority: 0.1 },
+    { url: `${SITE_URL}/legal/privacy`, changeFrequency: 'yearly', priority: 0.1 },
+    { url: `${SITE_URL}/legal/tokushoho`, changeFrequency: 'yearly', priority: 0.1 },
   ];
 }
