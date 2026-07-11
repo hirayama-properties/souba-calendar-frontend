@@ -72,12 +72,48 @@ export default function PrivacyPolicyPage() {
         Googleカレンダー連携の解除は、Googleアカウントの設定（アクセス権のあるサードパーティ アプリ）からいつでも行うことができます。
       </LegalP>
 
-      <LegalHeading>第6条（プライバシーポリシーの変更）</LegalHeading>
+      <LegalHeading>第6条（Googleユーザーデータの取扱いについて）</LegalHeading>
+      <LegalP>
+        本サービスのGoogleカレンダー連携機能（<code>calendar.events</code>スコープ）に関し、Google API Services User Data
+        Policy（Limited Use要件を含む）に基づき、以下のとおり取扱いを明示します。
+      </LegalP>
+      <LegalP>
+        ■ アクセスするデータ
+        <br />
+        Googleカレンダー連携を有効にした場合、当社が取得するのは、ユーザーのGoogleカレンダー（プライマリカレンダー）にイベントを追加・更新するためのアクセストークンのみです。ユーザーの既存のカレンダーの予定を読み取ることは一切ありません。
+      </LegalP>
+      <LegalP>
+        ■ データの利用目的
+        <br />
+        取得したアクセストークンは、本サービス上に表示される経済指標・中央銀行会合等のイベントを、ユーザー自身のGoogleカレンダーへ同期する目的にのみ使用します。
+      </LegalP>
+      <LegalP>
+        ■ データの第三者提供・共有
+        <br />
+        Googleカレンダー連携により取得したデータ（アクセストークンを含む）を第三者に提供・共有・販売することはありません。広告目的での利用や、与信判断等の目的での利用も一切行いません。
+      </LegalP>
+      <LegalP>
+        ■ データの保護
+        <br />
+        アクセストークンは、データベース基盤（Supabase Inc.）上で、暗号化された通信経路を通じて安全に保存・送受信しています。
+      </LegalP>
+      <LegalP>
+        ■ データの保持・削除
+        <br />
+        アクセストークンは、ユーザーがGoogleカレンダー連携を解除する（Googleアカウントの設定からアクセス権を取り消す、または本サービスのアカウントの削除を当社に請求する）まで保持されます。削除をご希望の場合は、お問い合わせページよりご連絡いただくか、Googleアカウントの設定から直接取り消すことができます。
+      </LegalP>
+      <LegalP>
+        ■ Limited Use遵守表明
+        <br />
+        当社によるGoogleカレンダーAPIから取得したユーザーデータの利用は、Google User Data Policy（Limited Use要件を含む）を遵守します。
+      </LegalP>
+
+      <LegalHeading>第7条（プライバシーポリシーの変更）</LegalHeading>
       <LegalP>
         本ポリシーの内容は、法令その他において有効な規定の形成を対象とするものを除き、ユーザーに通知することなく変更することができるものとします。変更後のプライバシーポリシーは、本サービス上に掲載した時点から有効となるものとします。
       </LegalP>
 
-      <LegalHeading>第7条（お問い合わせ）</LegalHeading>
+      <LegalHeading>第8条（お問い合わせ）</LegalHeading>
       <LegalP>本ポリシーに関するお問い合わせは、本サービス内のお問い合わせページよりお願いいたします。</LegalP>
     </LegalPage>
   );
