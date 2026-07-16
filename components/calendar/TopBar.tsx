@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useCalendarState } from './CalendarStateContext';
+import InstallAppButton from './InstallAppButton';
 import { useAuth } from '@/lib/useAuth';
 import { exportCsv, exportPdf, PremiumRequiredError } from '@/lib/api';
 import { isoLocal } from '@/lib/dateFormat';
@@ -149,6 +150,7 @@ export default function TopBar() {
           今日
         </button>
       )}
+      <InstallAppButton />
       <button
         onClick={() => handleExport('csv')}
         disabled={exporting}

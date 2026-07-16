@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { Noto_Sans_JP, IBM_Plex_Mono } from 'next/font/google';
 import { AuthProvider } from '@/lib/useAuth';
@@ -44,11 +44,24 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
   },
-  // AdSense's site-ownership check (separate from actually serving ads,
-  // which stays off until NEXT_PUBLIC_ADSENSE_CLIENT_ID is set post-approval
-  // — see lib/adsense.ts).
-  other: { 'google-adsense-account': 'ca-pub-8054486833130306' },
+  other: {
+    // AdSense's site-ownership check (separate from actually serving ads,
+    // which stays off until NEXT_PUBLIC_ADSENSE_CLIENT_ID is set
+    // post-approval — see lib/adsense.ts).
+    'google-adsense-account': 'ca-pub-8054486833130306',
+    // Next's `appleWebApp.capable` (below) only emits the unprefixed
+    // `mobile-web-app-capable` tag — Safari didn't honor that until iOS
+    // 17.4, so this vendor-prefixed one covers older iOS separately.
+    'apple-mobile-web-app-capable': 'yes',
+  },
+  // iOS Safari ignores manifest.json entirely for "Add to Home Screen" —
+  // these meta tags are what actually make the installed icon open without
+  // Safari's browser chrome there (Android/desktop Chrome read the manifest
+  // instead, via app/manifest.ts).
+  appleWebApp: { capable: true, statusBarStyle: 'default', title: '相場カレンダー' },
 };
+
+export const viewport: Viewport = { themeColor: '#fbfaf8' };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
