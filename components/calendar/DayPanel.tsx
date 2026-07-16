@@ -118,7 +118,7 @@ function EventCard({ ev }: { ev: DisplayEvent }) {
             </div>
           ))}
         </div>
-      ) : ev.prev_value || ev.forecast ? (
+      ) : ev.prev_value || ev.forecast || ev.actual_value ? (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1px', background: C.border, border: `1px solid ${C.border}`, borderRadius: '7px', overflow: 'hidden', marginTop: '12px' }}>
           {[
             ['前回', ev.prev_value || '—'],
