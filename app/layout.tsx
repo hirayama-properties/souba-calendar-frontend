@@ -4,6 +4,7 @@ import { Noto_Sans_JP, IBM_Plex_Mono } from 'next/font/google';
 import { AuthProvider } from '@/lib/useAuth';
 import { SITE_URL } from '@/lib/siteUrl';
 import { ADSENSE_CLIENT_ID } from '@/lib/adsense';
+import StaleBundleRecovery from '@/components/StaleBundleRecovery';
 import './globals.css';
 
 // Same families/weights as the prototype's Google Fonts <link> (相場カレンダー.dc.html
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             strategy="afterInteractive"
           />
         )}
+        <StaleBundleRecovery />
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
