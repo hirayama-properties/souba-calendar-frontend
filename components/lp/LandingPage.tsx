@@ -673,9 +673,9 @@ export default function LandingPage() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
               <div style={{ fontSize: '11px', fontWeight: 700, color: C.textLo, letterSpacing: '.1em' }}>解説</div>
-              <a href="#coverage" style={{ fontSize: '12.5px', color: C.textMid }}>FOMCとは</a>
-              <a href="#coverage" style={{ fontSize: '12.5px', color: C.textMid }}>SQとは</a>
-              <a href="#coverage" style={{ fontSize: '12.5px', color: C.textMid }}>配当の権利日</a>
+              <Link href="/guide/fomc" style={{ fontSize: '12.5px', color: C.textMid }}>FOMCとは</Link>
+              <Link href="/guide/sq" style={{ fontSize: '12.5px', color: C.textMid }}>SQとは</Link>
+              <Link href="/guide/dividend" style={{ fontSize: '12.5px', color: C.textMid }}>配当の権利日</Link>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
               <div style={{ fontSize: '11px', fontWeight: 700, color: C.textLo, letterSpacing: '.1em' }}>運営</div>
