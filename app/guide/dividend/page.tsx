@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import LegalPage, { LegalHeading, LegalP } from '@/components/legal/LegalPage';
+import AdSlot from '@/components/AdSlot';
+import { AD_SLOTS } from '@/lib/adsense';
 
 export const metadata: Metadata = {
   title: '配当の権利付き最終日・権利落ち日とは｜仕組みと注意点',
@@ -40,6 +42,9 @@ export default function DividendGuidePage() {
         >
           今月の権利付き最終日をカレンダーで確認する →
         </Link>
+      </div>
+      <div style={{ marginTop: '40px' }}>
+        <AdSlot slot={AD_SLOTS.guideArticle} style={{ minHeight: '250px' }} />
       </div>
     </LegalPage>
   );

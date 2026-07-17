@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import LegalPage, { LegalHeading, LegalP } from '@/components/legal/LegalPage';
+import AdSlot from '@/components/AdSlot';
+import { AD_SLOTS } from '@/lib/adsense';
 
 export const metadata: Metadata = {
   title: 'SQ（特別清算指数）とは｜メジャー・マイナーSQの違いと注意点',
@@ -45,6 +47,9 @@ export default function SqGuidePage() {
         >
           今月のSQ算出日をカレンダーで確認する →
         </Link>
+      </div>
+      <div style={{ marginTop: '40px' }}>
+        <AdSlot slot={AD_SLOTS.guideArticle} style={{ minHeight: '250px' }} />
       </div>
     </LegalPage>
   );

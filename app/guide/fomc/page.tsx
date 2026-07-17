@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import LegalPage, { LegalHeading, LegalP } from '@/components/legal/LegalPage';
+import AdSlot from '@/components/AdSlot';
+import { AD_SLOTS } from '@/lib/adsense';
 import { PALETTE } from '@/lib/palette';
 
 const C = PALETTE;
@@ -46,6 +48,9 @@ export default function FomcGuidePage() {
         >
           次回のFOMCをカレンダーで確認する →
         </Link>
+      </div>
+      <div style={{ marginTop: '40px' }}>
+        <AdSlot slot={AD_SLOTS.guideArticle} style={{ minHeight: '250px' }} />
       </div>
     </LegalPage>
   );

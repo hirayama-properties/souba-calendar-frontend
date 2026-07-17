@@ -11,4 +11,5 @@ export const ADSENSE_CLIENT_ID = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || nu
 export const AD_SLOTS = {
   sidebar: '1234567890',
   settingsBottom: '1234567891',
+  guideArticle: '1234567892',
 } as const;
