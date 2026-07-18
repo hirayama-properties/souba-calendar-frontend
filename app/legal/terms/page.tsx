@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import LegalPage, { LegalHeading, LegalP } from '@/components/legal/LegalPage';
 
-export const metadata: Metadata = { title: '利用規約' };
+export const metadata: Metadata = { title: '利用規約', alternates: { canonical: '/legal/terms' } };
 
 export default function TermsPage() {
   return (

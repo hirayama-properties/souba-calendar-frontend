@@ -7,6 +7,7 @@ import { AD_SLOTS } from '@/lib/adsense';
 export const metadata: Metadata = {
   title: '配当の権利付き最終日・権利落ち日とは｜仕組みと注意点',
   description: '配当・株主優待を受け取るための権利付き最終日と権利落ち日の仕組み、決済サイクル、権利落ち後に株価が下がりやすい理由を解説します。',
+  alternates: { canonical: '/guide/dividend' },
 };
 
 export default function DividendGuidePage() {

@@ -10,6 +10,7 @@ const C = PALETTE;
 export const metadata: Metadata = {
   title: 'FOMCとは｜開催日程・見るべきポイント',
   description: 'FOMC（連邦公開市場委員会）とは何か、開催スケジュール、政策金利発表が株価・為替に与える影響、投資家が確認すべきポイントを解説します。',
+  alternates: { canonical: '/guide/fomc' },
 };
 
 export default function FomcGuidePage() {

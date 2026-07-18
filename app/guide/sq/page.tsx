@@ -7,6 +7,7 @@ import { AD_SLOTS } from '@/lib/adsense';
 export const metadata: Metadata = {
   title: 'SQ（特別清算指数）とは｜メジャー・マイナーSQの違いと注意点',
   description: 'SQ（特別清算指数）とは何か、メジャーSQとマイナーSQの違い、算出日に値動きが荒くなりやすい理由と個人投資家が気をつけるべき点を解説します。',
+  alternates: { canonical: '/guide/sq' },
 };
 
 export default function SqGuidePage() {

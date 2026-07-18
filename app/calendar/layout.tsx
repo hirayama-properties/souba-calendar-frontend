@@ -1,25 +1,20 @@
-'use client';
-
-import { Suspense, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { CalendarStateProvider, useCalendarState } from '@/components/calendar/CalendarStateContext';
+import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import { CalendarStateProvider } from '@/components/calendar/CalendarStateContext';
 import { CalendarDataProvider } from '@/components/calendar/CalendarDataContext';
 import PremiumModal from '@/components/calendar/PremiumModal';
+import PremiumQueryHandler from '@/components/calendar/PremiumQueryHandler';
 
-/** Lets `/calendar?premium=1` (linked from the LP's pricing CTA) auto-open
- * the premium modal, matching the prototype's `startPremium()` behavior. */
-function PremiumQueryHandler() {
-  const searchParams = useSearchParams();
-  const { openPremium } = useCalendarState();
-  const wantsPremium = searchParams.get('premium') === '1';
-
-  useEffect(() => {
-    if (wantsPremium) openPremium();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wantsPremium]);
-
-  return null;
-}
+// /calendar/page.tsx and this layout's own children are all 'use client'
+// (they read auth/calendar-state hooks), so neither can export `metadata`
+// directly — this file stays a plain Server Component for that reason,
+// carrying the metadata for the whole /calendar subtree (including
+// /calendar/settings, which inherits it unless it sets its own).
+export const metadata: Metadata = {
+  title: 'カレンダー',
+  description: 'FOMC・日銀会合・米雇用統計・CPI・SQ・配当の権利日まで、日米の重要スケジュールを1つのカレンダーで確認できます。',
+  alternates: { canonical: '/calendar' },
+};
 
 // Only the shared state/data providers + the premium modal (which both
 // /calendar and /calendar/settings can open) live here. The sidebar/app-shell

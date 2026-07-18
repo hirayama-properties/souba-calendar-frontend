@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import LegalPage, { LegalHeading, LegalP } from '@/components/legal/LegalPage';
 
-export const metadata: Metadata = { title: '特定商取引法に基づく表記' };
+export const metadata: Metadata = { title: '特定商取引法に基づく表記', alternates: { canonical: '/legal/tokushoho' } };
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
